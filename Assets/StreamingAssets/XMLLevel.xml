@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<FourDLevel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <levels>
+    <ThreeDLevel w="0">
+      <cells>
+        <ThreeDCell x="1" y="0" z="0" content="cube" />
+        <ThreeDCell x="1" y="0" z="1" content="cube" />
+        <ThreeDCell x="1" y="0" z="2" content="cube" />
+        <ThreeDCell x="1" y="0" z="3" content="cube" />
+        <ThreeDCell x="1" y="0" z="4" content="cube" />
+        <ThreeDCell x="2" y="0" z="0" content="cube" />
+        <ThreeDCell x="2" y="0" z="1" content="cube" />
+        <ThreeDCell x="2" y="0" z="2" content="cube" />
+        <ThreeDCell x="2" y="0" z="3" content="cube" />
+        <ThreeDCell x="2" y="0" z="4" content="cube" />
+        <ThreeDCell x="3" y="0" z="0" content="cube" />
+        <ThreeDCell x="3" y="0" z="1" content="cube" />
+        <ThreeDCell x="3" y="0" z="2" content="cube" />
+        <ThreeDCell x="3" y="0" z="3" content="cube" />
+        <ThreeDCell x="3" y="0" z="4" content="cube" />
+      </cells>
+    </ThreeDLevel>
+    <ThreeDLevel w="1">
+      <cells>
+        <ThreeDCell x="0" y="0" z="0" content="cube" />
+        <ThreeDCell x="0" y="0" z="1" content="cube" />
+        <ThreeDCell x="0" y="0" z="2" content="cube" />
+        <ThreeDCell x="0" y="0" z="3" content="cube" />
+        <ThreeDCell x="0" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="0" z="0" content="cube" />
+        <ThreeDCell x="1" y="0" z="1" content="ground" />
+        <ThreeDCell x="1" y="0" z="2" content="ground" />
+        <ThreeDCell x="1" y="0" z="3" content="ground" />
+        <ThreeDCell x="1" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="1" z="1" content="light" />
+        <ThreeDCell x="2" y="0" z="0" content="cube" />
+        <ThreeDCell x="2" y="0" z="1" content="ground" />
+        <ThreeDCell x="2" y="0" z="2" content="ground" />
+        <ThreeDCell x="2" y="0" z="3" content="ground" />
+        <ThreeDCell x="2" y="0" z="4" content="cube" />
+        <ThreeDCell x="2" y="1" z="2" content="light" />
+        <ThreeDCell x="3" y="0" z="0" content="cube" />
+        <ThreeDCell x="3" y="0" z="1" content="ground" />
+        <ThreeDCell x="3" y="0" z="2" content="ground" />
+        <ThreeDCell x="3" y="0" z="3" content="littleCube" />
+        <ThreeDCell x="3" y="0" z="4" content="cube" />
+        <ThreeDCell x="3" y="1" z="3" content="light" />
+        <ThreeDCell x="4" y="0" z="0" content="cube" />
+        <ThreeDCell x="4" y="0" z="1" content="cube" />
+        <ThreeDCell x="4" y="0" z="2" content="cube" />
+        <ThreeDCell x="4" y="0" z="3" content="cube" />
+        <ThreeDCell x="4" y="0" z="4" content="cube" />
+      </cells>
+    </ThreeDLevel>
+    <ThreeDLevel w="2">
+      <cells>
+        <ThreeDCell x="0" y="0" z="0" content="cube" />
+        <ThreeDCell x="0" y="0" z="1" content="cube" />
+        <ThreeDCell x="0" y="0" z="2" content="cube" />
+        <ThreeDCell x="0" y="0" z="3" content="cube" />
+        <ThreeDCell x="0" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="0" z="0" content="cube" />
+        <ThreeDCell x="1" y="0" z="1" content="ground" />
+        <ThreeDCell x="1" y="0" z="2" content="ground" />
+        <ThreeDCell x="1" y="0" z="3" content="littleCylinder" />
+        <ThreeDCell x="1" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="1" z="3" content="light" />
+        <ThreeDCell x="2" y="0" z="0" content="cube" />
+        <ThreeDCell x="2" y="0" z="1" content="ground" />
+        <ThreeDCell x="2" y="0" z="2" content="cylinder" />
+        <ThreeDCell x="2" y="0" z="3" content="ground" />
+        <ThreeDCell x="2" y="0" z="4" content="cube" />
+        <ThreeDCell x="3" y="0" z="0" content="cube" />
+        <ThreeDCell x="3" y="0" z="1" content="ground" />
+        <ThreeDCell x="3" y="0" z="2" content="ground" />
+        <ThreeDCell x="3" y="0" z="3" content="ground" />
+        <ThreeDCell x="3" y="0" z="4" content="cube" />
+        <ThreeDCell x="3" y="1" z="1" content="light" />
+        <ThreeDCell x="4" y="0" z="0" content="cube" />
+        <ThreeDCell x="4" y="0" z="1" content="cube" />
+        <ThreeDCell x="4" y="0" z="2" content="cube" />
+        <ThreeDCell x="4" y="0" z="3" content="cube" />
+        <ThreeDCell x="4" y="0" z="4" content="cube" />
+      </cells>
+    </ThreeDLevel>
+    <ThreeDLevel w="3">
+      <cells>
+        <ThreeDCell x="0" y="0" z="0" content="cube" />
+        <ThreeDCell x="0" y="0" z="1" content="cube" />
+        <ThreeDCell x="0" y="0" z="2" content="cube" />
+        <ThreeDCell x="0" y="0" z="3" content="cube" />
+        <ThreeDCell x="0" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="0" z="0" content="cube" />
+        <ThreeDCell x="1" y="0" z="1" content="littleSphere" />
+        <ThreeDCell x="1" y="0" z="2" content="ground" />
+        <ThreeDCell x="1" y="0" z="3" content="ground" />
+        <ThreeDCell x="1" y="0" z="4" content="cube" />
+        <ThreeDCell x="1" y="1" z="1" content="light" />
+        <ThreeDCell x="2" y="0" z="0" content="cube" />
+        <ThreeDCell x="2" y="0" z="1" content="ground" />
+        <ThreeDCell x="2" y="0" z="2" content="ground" />
+        <ThreeDCell x="2" y="0" z="3" content="ground" />
+        <ThreeDCell x="2" y="0" z="4" content="cube" />
+        <ThreeDCell x="2" y="1" z="2" content="light" />
+        <ThreeDCell x="3" y="0" z="0" content="cube" />
+        <ThreeDCell x="3" y="0" z="1" content="cube" />
+        <ThreeDCell x="3" y="0" z="2" content="cube" />
+        <ThreeDCell x="3" y="0" z="3" content="cube" />
+        <ThreeDCell x="3" y="0" z="4" content="cube" />
+      </cells>
+    </ThreeDLevel>
+    <ThreeDLevel w="4">
+      <cells>
+        <ThreeDCell x="1" y="0" z="0" content="cube" />
+        <ThreeDCell x="1" y="0" z="1" content="cube" />
+        <ThreeDCell x="1" y="0" z="2" content="cube" />
+        <ThreeDCell x="1" y="0" z="3" content="cube" />
+        <ThreeDCell x="1" y="0" z="4" content="cube" />
+        <ThreeDCell x="2" y="0" z="0" content="cube" />
+        <ThreeDCell x="2" y="0" z="1" content="cube" />
+        <ThreeDCell x="2" y="0" z="2" content="cube" />
+        <ThreeDCell x="2" y="0" z="3" content="cube" />
+        <ThreeDCell x="2" y="0" z="4" content="cube" />
+      </cells>
+    </ThreeDLevel>
+  </levels>
+</FourDLevel>
