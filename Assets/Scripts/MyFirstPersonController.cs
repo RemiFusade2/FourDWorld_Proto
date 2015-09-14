@@ -38,6 +38,9 @@ public class MyFirstPersonController : MonoBehaviour
 	public float stepWalk;
 	public float stepRotate;
 
+	public bool ignoreFalls;
+	public bool ignoreCollisions;
+
 	/**
 	 * Set the player position and ensure that both previous level and current level are consistent with it.
 	 * 
@@ -46,17 +49,29 @@ public class MyFirstPersonController : MonoBehaviour
 	 * */
 	public void SetPlayerPosition(Vector3 newPosition, GameObject previousLevel)
 	{
+		Debug.Log ("endPlayerPosition = " + endPlayerPosition.ToString ());
+		Debug.Log ("newPosition = " + newPosition.ToString ());
+
 		// If the player moved in the scene, we need to be sure the level in which he was moves with him.
-		previousLevel.transform.Translate (new Vector3(newPosition.x,endPlayerPosition.y,newPosition.z) - endPlayerPosition);
+		previousLevel.transform.Translate (newPosition - endPlayerPosition);
 
 		// I struggle with the Y axis...
-		startPlayerPosition = new Vector3(newPosition.x,startPlayerPosition.y,newPosition.z);
-		endPlayerPosition = new Vector3(newPosition.x,endPlayerPosition.y,newPosition.z);
-		this.transform.localPosition = new Vector3(newPosition.x,this.transform.localPosition.y,newPosition.z);
+		startPlayerPosition = newPosition;
+		endPlayerPosition = newPosition;
+		this.transform.localPosition = newPosition;
 	}
 
 	// Use this for initialization
 	void Start () 
+	{
+		ResetPlayer ();
+	}
+
+	private Coroutine CheckPlayerFallsCoroutine;
+	private Coroutine CheckPlayerQuestionMarkCoroutine;
+	private Coroutine CheckPlayerCollectibleCoroutine;
+
+	public void ResetPlayer()
 	{
 		startCameraQuaternion = Quaternion.identity;
 		endCameraQuaternion = Quaternion.identity;
@@ -73,9 +88,23 @@ public class MyFirstPersonController : MonoBehaviour
 		playerMoves = false;
 		playerFalls = false;
 
+		if (CheckPlayerFallsCoroutine != null)
+		{
+			StopCoroutine(CheckPlayerFallsCoroutine);
+		}
+		if (CheckPlayerQuestionMarkCoroutine != null)
+		{
+			StopCoroutine(CheckPlayerQuestionMarkCoroutine);
+		}
+		if (CheckPlayerCollectibleCoroutine != null)
+		{
+			StopCoroutine(CheckPlayerCollectibleCoroutine);
+		}
+
 		// These coroutine will call themselves regularly
-		StartCoroutine(WaitAndCheckIfPlayerFalls(0.1f)); // Every 0.1s, we check if the player should fall
-		StartCoroutine(WaitAndCheckIfPlayerIsInteractingWithAQuestionMark(0.5f)); // Every 0.5s, we check if the player is in front of a question mark
+		CheckPlayerFallsCoroutine = StartCoroutine(WaitAndCheckIfPlayerFalls(0.1f)); // Every 0.1s, we check if the player should fall
+		CheckPlayerQuestionMarkCoroutine = StartCoroutine(WaitAndCheckIfPlayerIsInteractingWithAQuestionMark(0.5f)); // Every 0.5s, we check if the player is in front of a question mark
+		CheckPlayerCollectibleCoroutine = StartCoroutine(WaitAndCheckIfPlayerGetsACollectible(1/30.0f));
 	}
 
 	IEnumerator WaitAndCheckIfPlayerFalls(float timer)
@@ -85,12 +114,14 @@ public class MyFirstPersonController : MonoBehaviour
 		if (endPlayerPosition.Equals(this.transform.position) && DistanceBetweenPlayerAndSolidGround() > 0)
 		{
 			startPlayerPosition = this.transform.localPosition;
-			endPlayerPosition = this.transform.position - this.transform.up * DistanceBetweenPlayerAndSolidGround();
+			float height = DistanceBetweenPlayerAndSolidGround();
+			endPlayerPosition = this.transform.position - this.transform.up * height;
+			gameEngine.UpdatePlayerFourDPosition(0,-height/3.0f,0);
 			playerMoveStep = 0;
 			playerMoves = true;
 			playerFalls = true;
 		}
-		StartCoroutine(WaitAndCheckIfPlayerFalls(timer));
+		CheckPlayerFallsCoroutine = StartCoroutine(WaitAndCheckIfPlayerFalls(timer));
 	}
 
 	IEnumerator WaitAndCheckIfPlayerIsInteractingWithAQuestionMark(float timer)
@@ -107,12 +138,100 @@ public class MyFirstPersonController : MonoBehaviour
 			questionMarkScript.ShowInfoText();
 			questionMarkScript.HideQuestionMark();
 		}
-		StartCoroutine(WaitAndCheckIfPlayerIsInteractingWithAQuestionMark(timer));
+		CheckPlayerQuestionMarkCoroutine = StartCoroutine(WaitAndCheckIfPlayerIsInteractingWithAQuestionMark(timer));
+	}
+
+	IEnumerator WaitAndCheckIfPlayerGetsACollectible(float timer)
+	{
+		yield return new WaitForSeconds (timer);
+		// player falls
+		if (IsPlayerOnACollectible ())
+		{
+			gameEngine.AddCollectible();
+		}
+		CheckPlayerCollectibleCoroutine = StartCoroutine(WaitAndCheckIfPlayerGetsACollectible(timer));
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		// Edit level 
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			startPlayerPosition = this.transform.localPosition;
+			this.transform.localPosition = endPlayerPosition;
+			this.transform.localRotation = endPlayerQuaternion;
+			this.transform.position = this.transform.position + this.transform.up * -3;
+			endPlayerPosition = this.transform.localPosition;
+			gameEngine.MovePlayerVertically(-1);
+			//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
+			playerMoveStep = 0;
+			playerMoves = true;
+		} 
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			startPlayerPosition = this.transform.localPosition;
+			this.transform.localPosition = endPlayerPosition;
+			this.transform.localRotation = endPlayerQuaternion;
+			this.transform.position = this.transform.position + this.transform.up * 3;
+			endPlayerPosition = this.transform.localPosition;
+			gameEngine.MovePlayerVertically(1);
+			//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
+			playerMoveStep = 0;
+			playerMoves = true;
+		} 
+		if (Input.GetKeyDown(KeyCode.Keypad1))
+	    {
+			gameEngine.AddHalfCubeToCurrentPosition("Green");
+		} 
+		if (Input.GetKeyDown(KeyCode.Keypad2))
+		{
+			gameEngine.AddHalfCubeToCurrentPosition("Orange");
+		} 
+		if (Input.GetKeyDown(KeyCode.Keypad3))
+		{
+			gameEngine.AddHalfCubeToCurrentPosition("Red");
+		}
+		if (Input.GetKeyDown(KeyCode.Keypad4))
+		{
+			gameEngine.AddCubeToCurrentPosition("green");
+		} 
+		if (Input.GetKeyDown(KeyCode.Keypad5))
+		{
+			gameEngine.AddCubeToCurrentPosition("orange");
+		} 
+		if (Input.GetKeyDown(KeyCode.Keypad6))
+		{
+			gameEngine.AddCubeToCurrentPosition("red");
+		}
+		if (Input.GetKeyDown(KeyCode.Keypad7))
+		{
+			gameEngine.AddPalmTreeToCurrentPosition();
+		}
+		if (Input.GetKeyDown(KeyCode.Keypad8))
+		{
+			gameEngine.AddConiferToCurrentPosition();
+		}
+		if (Input.GetKeyDown(KeyCode.Keypad9))
+		{
+			gameEngine.AddBroadleafToCurrentPosition();
+		}
+		if (Input.GetKeyDown(KeyCode.L))
+		{
+			gameEngine.AddLightToCurrentPosition();
+		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			gameEngine.RemoveCellFromCurrentPosition();
+		}
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			gameEngine.SaveLevelToXML("test.xml");
+		}
+
+
+
 		// During a 4D rotation, all the level is drawn again. 
 		// During this time, we don't want the player to be able to move. This is why we use "holdAllInputs"
 		if (!gameEngine.holdAllInputs)
@@ -128,7 +247,7 @@ public class MyFirstPersonController : MonoBehaviour
 				this.transform.localRotation = endPlayerQuaternion;
 				this.transform.position = this.transform.position + this.transform.forward * stepWalk + this.transform.up * (isStairs ? 1.5f : 0);
 				endPlayerPosition = this.transform.localPosition;
-				gameEngine.UpdatePlayerFourDPosition(this.transform.forward.x,this.transform.forward.y,this.transform.forward.z);
+				gameEngine.UpdatePlayerFourDPosition(this.transform.forward.x,this.transform.forward.y + (isStairs ? 0.5f : 0),this.transform.forward.z);
 				playerMoveStep = 0;
 				playerMoves = true;
 			}
@@ -273,7 +392,6 @@ public class MyFirstPersonController : MonoBehaviour
 				newLocalRotation = Quaternion.Euler(new Vector3(playerCamera.transform.localRotation.eulerAngles.x, playerCameraOrientationBefore.eulerAngles.y, playerCamera.transform.localRotation.eulerAngles.z));
 			}
 			playerCamera.transform.localRotation = newLocalRotation;
-
 		}
 		// When we release the left button, the camera goes back to looking in front of us
 		if (Input.GetMouseButtonUp(0))
@@ -328,12 +446,29 @@ public class MyFirstPersonController : MonoBehaviour
 		questionMarkBehaviour = null;
 		Ray obstacleRayBelow = new Ray (this.transform.position + this.transform.up*1.5f, -this.transform.up);
 		RaycastHit obstacleHit;
-		//Debug.DrawRay (this.transform.position + this.transform.up*1.5f, -this.transform.up);
 		if (Physics.Raycast (obstacleRayBelow, out obstacleHit, 2)) 
 		{
 			if (obstacleHit.collider.gameObject.tag.Equals("questionMark"))
 			{
 				questionMarkBehaviour = obstacleHit.collider.GetComponentInParent<QuestionMarkBehaviour>();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Specific test for being on a collectible.
+	 * */
+	private bool IsPlayerOnACollectible()
+	{
+		Ray obstacleRayBelow = new Ray (this.transform.position + this.transform.up*1.5f, -this.transform.up);
+		RaycastHit obstacleHit;
+		if (Physics.Raycast (obstacleRayBelow, out obstacleHit, 2)) 
+		{
+			if (obstacleHit.collider.gameObject.tag.Equals("Collectible"))
+			{
+				Destroy (obstacleHit.collider.gameObject);
 				return true;
 			}
 		}
@@ -347,12 +482,20 @@ public class MyFirstPersonController : MonoBehaviour
 	private bool IsObstacleInFrontOfPlayer(Vector3 direction, out bool isStairs)
 	{
 		isStairs = false;
+		if (ignoreCollisions)
+		{
+			return false;
+		}
 		Ray obstacleRayBelowMiddle = new Ray (endPlayerPosition + this.transform.up * 0.45f, direction);
 		Ray obstacleRayOverMiddle = new Ray (endPlayerPosition + this.transform.up * 0.55f, direction);
 		RaycastHit obstacleHit;
 		if (Physics.Raycast (obstacleRayOverMiddle, out obstacleHit, 3)) 
 		{
 			if (obstacleHit.collider.tag.Equals("questionMark"))
+			{
+				return false;
+			}
+			if (obstacleHit.collider.transform.parent.name.Contains("collectible"))
 			{
 				return false;
 			}
@@ -373,9 +516,14 @@ public class MyFirstPersonController : MonoBehaviour
 	 * */
 	private float DistanceBetweenPlayerAndSolidGround()
 	{
+		if (ignoreFalls)
+		{
+			return 0;
+		}
 		Ray obstacleRay = new Ray (endPlayerPosition - this.transform.up * 0.9f, -this.transform.up);
 		RaycastHit obstacleHit;
-		if (Physics.Raycast (obstacleRay, out obstacleHit, 100, ~(1 << LayerMask.NameToLayer("questionMark")) )) 
+		int layerMask = (1 << LayerMask.NameToLayer("questionMark")) | (1 << LayerMask.NameToLayer("collectible"));
+		if (Physics.Raycast (obstacleRay, out obstacleHit, 100, ~layerMask )) 
 		{
 			if (obstacleHit.distance < 0.11f)
 			{

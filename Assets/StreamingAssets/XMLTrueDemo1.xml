@@ -6,13 +6,7 @@
     <z>1</z>
     <w>1</w>
   </startPlayerPosition>
-  <endLevelPosition>
-    <x>3</x>
-    <y>1</y>
-    <z>0</z>
-    <w>1</w>
-  </endLevelPosition>
-  <nextLevelFileName>XMLTrueDemo1.xml</nextLevelFileName>
+  <collectibleCountToNextLevel>1</collectibleCountToNextLevel>
   <levels>
     <ThreeDLevel w="0">
       <cells>
@@ -535,7 +529,7 @@
         <ThreeDCell x="2" y="9" z="2" content="empty" />
         <ThreeDCell x="2" y="9" z="3" content="empty" />
         <ThreeDCell x="2" y="9" z="4" content="greenCube" />
-        <ThreeDCell x="3" y="9" z="0" content="pointLight" />
+        <ThreeDCell x="3" y="9" z="0" content="collectible" />
         <ThreeDCell x="3" y="9" z="1" content="empty" />
         <ThreeDCell x="3" y="9" z="2" content="empty" />
         <ThreeDCell x="3" y="9" z="3" content="empty" />

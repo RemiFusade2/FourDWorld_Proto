@@ -6,13 +6,7 @@
     <z>1</z>
     <w>1</w>
   </startPlayerPosition>
-  <endLevelPosition>
-    <x>0</x>
-    <y>0</y>
-    <z>0</z>
-    <w>0</w>
-  </endLevelPosition>
-  <nextLevelFileName>XMLLevel2.xml</nextLevelFileName>
+  <collectibleCountToNextLevel>3</collectibleCountToNextLevel>
   <levels>
     <ThreeDLevel w="0">
       <cells>
@@ -311,7 +305,7 @@
         <ThreeDCell x="1" y="1" z="4" content="orangeCube" />
         <ThreeDCell x="2" y="1" z="0" content="orangeCube" />
         <ThreeDCell x="2" y="1" z="1" content="empty" />
-        <ThreeDCell x="2" y="1" z="2" content="empty" />
+        <ThreeDCell x="2" y="1" z="2" content="collectible" />
         <ThreeDCell x="2" y="1" z="3" content="empty" />
         <ThreeDCell x="2" y="1" z="4" content="orangeCube" />
         <ThreeDCell x="3" y="1" z="0" content="orangeCube" />

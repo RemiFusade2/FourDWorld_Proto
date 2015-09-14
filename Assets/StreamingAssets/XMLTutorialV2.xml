@@ -6,13 +6,7 @@
     <z>3</z>
     <w>1</w>
   </startPlayerPosition>
-  <endLevelPosition>
-    <x>5</x>
-    <y>1</y>
-    <z>14</z>
-    <w>2</w>
-  </endLevelPosition>
-  <nextLevelFileName>XMLTrueDemo1.xml</nextLevelFileName>
+  <collectibleCountToNextLevel>1</collectibleCountToNextLevel>
   <levels>
     <ThreeDLevel w="0">
       <cells>
@@ -1056,7 +1050,7 @@
         <ThreeDCell x="5" y="1" z="8" content="empty" />
         <ThreeDCell x="5" y="1" z="9" content="empty" />
         <ThreeDCell x="5" y="1" z="10" content="empty" />
-        <ThreeDCell x="5" y="1" z="11" content="empty" />
+        <ThreeDCell x="5" y="1" z="11" content="infoPoint" infoText="Aide: trouve tous les collectibles pour terminer le niveau" />
         <ThreeDCell x="6" y="1" z="0" content="orangeCube" />
         <ThreeDCell x="6" y="1" z="1" content="orangeCube" />
         <ThreeDCell x="6" y="1" z="2" content="orangeCube" />
@@ -1336,7 +1330,7 @@
         <ThreeDCell x="4" y="1" z="14" content="orangeCube" />
         <ThreeDCell x="5" y="1" z="12" content="empty" />
         <ThreeDCell x="5" y="1" z="13" content="empty" />
-        <ThreeDCell x="5" y="1" z="14" content="empty" />
+        <ThreeDCell x="5" y="1" z="14" content="collectible" />
         <ThreeDCell x="6" y="1" z="12" content="orangeCube" />
         <ThreeDCell x="6" y="1" z="13" content="orangeCube" />
         <ThreeDCell x="6" y="1" z="14" content="orangeCube" />

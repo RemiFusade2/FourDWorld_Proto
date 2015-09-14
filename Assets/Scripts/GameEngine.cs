@@ -20,8 +20,12 @@ public class FourDLevel
 	public Vector4 startPlayerPosition;
 
 	// At which coordinates the player go to next level
+	// deprecated
 	[XmlElement("endLevelPosition")]
 	public Vector4 endLevelPosition;
+	
+	[XmlElement("collectibleCountToNextLevel")]
+	public int collectibleCountToNextLevel;
 
 	// The XML to load for the next level
 	[XmlElement("nextLevelFileName")]
@@ -164,6 +168,10 @@ public class GameEngine : MonoBehaviour
 	public Text canvasInfoText;	
 	private Coroutine hidePanelCoroutine;
 
+	// Collectibles
+	private int currentCollectibleCount;
+	private int endLevelCollectibleCount;
+
 	/**
 	 * Hide UI Panel
 	 * */
@@ -207,10 +215,81 @@ public class GameEngine : MonoBehaviour
 		Matrix4x4 transformMatrix = new Matrix4x4 ();
 		transformMatrix.SetColumn (0, fourDLevelRight);
 		transformMatrix.SetColumn (1, fourDLevelUp);
-		transformMatrix.SetColumn (2, fourDLevelForward );
+		transformMatrix.SetColumn (2, fourDLevelForward);
 		transformMatrix.SetColumn (3, Vector4.zero);
 		fourDPlayerPosition += transformMatrix * deltaCoordinates;
-		//Debug.Log ("New 4D Coordinates = " + fourDPlayerPosition.ToString ());
+		Debug.Log ("New 4D Coordinates = " + fourDPlayerPosition.ToString ());
+	}
+
+	public void MovePlayerVertically(int deltaY)
+	{
+		fourDPlayerPosition.y += deltaY;
+	}
+
+	public void AddHalfCubeToCurrentPosition(string color)
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = "half"+color+"Cube";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+		
+	public void AddCubeToCurrentPosition(string color)
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = color+"Cube";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+	
+	public void AddLightToCurrentPosition()
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = "pointLight";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+	
+	public void AddPalmTreeToCurrentPosition()
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = "ground_palmtree";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+	
+	public void AddConiferToCurrentPosition()
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = "ground_conifer";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+	
+	public void AddBroadleafToCurrentPosition()
+	{
+		ThreeDCell cell = new ThreeDCell ();
+		cell.xCoordinate = Mathf.RoundToInt( fourDPlayerPosition.x );
+		cell.yCoordinate = Mathf.RoundToInt(fourDPlayerPosition.y);
+		cell.zCoordinate = Mathf.RoundToInt( fourDPlayerPosition.z );
+		cell.content = "ground_broadleaf";
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = cell;
+	}
+
+
+	public void RemoveCellFromCurrentPosition()
+	{
+		world [Mathf.RoundToInt(fourDPlayerPosition.x), Mathf.RoundToInt(fourDPlayerPosition.y), Mathf.RoundToInt(fourDPlayerPosition.z), Mathf.RoundToInt(fourDPlayerPosition.w)] = null;
 	}
 
 	/**
@@ -338,7 +417,8 @@ public class GameEngine : MonoBehaviour
 				}
 			}
 			fourDPlayerPosition = fourDLevel.startPlayerPosition;
-			endLevelPosition = fourDLevel.endLevelPosition;
+			//endLevelPosition = fourDLevel.endLevelPosition;
+			endLevelCollectibleCount = fourDLevel.collectibleCountToNextLevel;
 			nextLevelFileName = fourDLevel.nextLevelFileName;
 			// default axes
 			fourDLevelRight = new Vector4(1,0,0,0);
@@ -360,6 +440,17 @@ public class GameEngine : MonoBehaviour
 		}
 	}
 
+	public void AddCollectible()
+	{
+		currentCollectibleCount++;
+		world [Mathf.RoundToInt (fourDPlayerPosition.x), Mathf.RoundToInt (fourDPlayerPosition.y), Mathf.RoundToInt (fourDPlayerPosition.z), Mathf.RoundToInt (fourDPlayerPosition.w)] = null;
+		if (currentCollectibleCount < endLevelCollectibleCount)
+		{
+			ShowPanel( (endLevelCollectibleCount-currentCollectibleCount) + " collectible(s) restant(s) !");
+		}
+		CheckEndLevel ();
+	}
+
 	/**
 	 * [Debug method]
 	 * Save current level in a XML file.
@@ -368,27 +459,52 @@ public class GameEngine : MonoBehaviour
 	public void SaveLevelToXML(string fileName)
 	{
 		FourDLevel fourDLevel = new FourDLevel ();
-		fourDLevel.startPlayerPosition = new Vector4 (1, 2, 3, 4);
+		fourDLevel.startPlayerPosition = this.fourDPlayerPosition;
+		fourDLevel.endLevelPosition = this.endLevelPosition;
 		fourDLevel.levels = new List<ThreeDLevel> ();
 		fourDLevel.nextLevelFileName = "test.xml";
+
+		bool saveCubesAtTheEnd = false;
+
 		for (int w = 0 ; w < world.GetLength(3) ; w++)
 		{
 			ThreeDLevel threeDLevel = new ThreeDLevel ();
 			threeDLevel.wCoordinate = w;
 			threeDLevel.cells = new List<ThreeDCell> ();
-			for (int x = 0 ; x < world.GetLength(0) ; x++)
+
+			List<ThreeDCell> coloredCubes =  new List<ThreeDCell> ();
+
+			for (int y = 0 ; y < world.GetLength(1) ; y++)
 			{
-				for (int y = 0 ; y < world.GetLength(1) ; y++)
+				for (int x = 0 ; x < world.GetLength(0) ; x++)
 				{
 					for (int z = 0 ; z < world.GetLength(2) ; z++)
 					{
 						if (world[x,y,z,w] != null)
 						{
-							threeDLevel.cells.Add(world[x,y,z,w]);
+							if (saveCubesAtTheEnd &&
+							    (world[x,y,z,w].content.Equals("greenCube") ||
+							    world[x,y,z,w].content.Equals("orangeCube") ||
+							    world[x,y,z,w].content.Equals("redCube") ) )
+							{
+								coloredCubes.Add(world[x,y,z,w]);
+							}
+							else
+							{
+								threeDLevel.cells.Add(world[x,y,z,w]);
+							}
 						}
 					}					
 				}				
 			}
+			if (saveCubesAtTheEnd)
+			{
+				foreach(ThreeDCell cell in coloredCubes)
+				{
+					threeDLevel.cells.Add(cell);
+				}
+			}
+
 			fourDLevel.levels.Add (threeDLevel);
 		}
 
@@ -397,22 +513,36 @@ public class GameEngine : MonoBehaviour
 		fourDLevel.Save (pathToXMLFile);
 	}
 
+	private Coroutine ShowIntroMenuCoroutine;
+
 	/**
 	 * Return true if the player is at the end of the level.
 	 * */
 	private bool CheckEndLevel()
 	{
+		if (currentCollectibleCount >= endLevelCollectibleCount)
+		{
+			ShowPanel ("Fin du niveau ! Félicitations !");
+			ShowIntroMenuCoroutine = StartCoroutine(WaitAndShowIntroMenu(2.0f));
+			return true;
+		}
+		return false;
+		/*
 		Vector4 distanceToEnd = (fourDPlayerPosition - endLevelPosition);
 		if (distanceToEnd.magnitude < 0.5f)
 		{
 			ShowPanel ("Fin du niveau ! Félicitations !");
-			LoadLevelFromXML(nextLevelFileName);
-			// Build level
-			BuildNextLevel ();
-			SwitchLevels ();
+			StartCoroutine(WaitAndShowIntroMenu(2.0f));
 			return true;
 		}
 		return false;
+		*/
+	}
+
+	IEnumerator WaitAndShowIntroMenu(float timer)
+	{
+		yield return new WaitForSeconds (timer);		
+		ShowIntroMenu();
 	}
 
 	// Use this for initialization
@@ -428,14 +558,39 @@ public class GameEngine : MonoBehaviour
 			availableCellPrefabsDico.Add(prefab.name, prefab);
 		}
 
+		ShowIntroMenu();
+
+		holdAllInputs = true;
+	}
+
+	public GameObject IntroMenu;
+
+	public void ShowIntroMenu()
+	{
+		currentCollectibleCount = 0;
+		IntroMenu.SetActive (true);
+	}
+
+	public void StartPuzzle(string puzzleFileName)
+	{
+		if (ShowIntroMenuCoroutine != null)
+		{
+			StopCoroutine(ShowIntroMenuCoroutine);
+		}
+
 		// init
-		LoadLevelFromXML (xmlFileName);
-
-		//SaveLevelToXML ("test.xml");
-
+		currentCollectibleCount = 0;
+		LoadLevelFromXML (puzzleFileName);
+		
 		// Build level
 		BuildNextLevel ();
 		SwitchLevels ();
+
+		// Hide Intro Menu
+		IntroMenu.SetActive (false);
+		holdAllInputs = true;
+
+		player.ResetPlayer ();
 	}
 	
 	// Update is called once per frame
@@ -443,10 +598,16 @@ public class GameEngine : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			Application.Quit();
+			ShowIntroMenu();			
+			holdAllInputs = true;
 		}
 
-		CheckEndLevel ();
+		//CheckEndLevel ();
+	}
+
+	public void ExitApplication()
+	{
+		Application.Quit ();
 	}
 
 	/**
@@ -461,17 +622,23 @@ public class GameEngine : MonoBehaviour
 		// Depending on the current section, it can go from smallest coordinates to highest or the opposite.
 		Vector4 fourDcoordinates = Vector4.zero;
 		fourDcoordinates = new Vector4(fourDLevelFixed.x==0 ? 0 : fourDPlayerPosition.x , fourDLevelFixed.y==0 ? 0 : fourDPlayerPosition.y , fourDLevelFixed.z==0 ? 0 : fourDPlayerPosition.z , fourDLevelFixed.w==0 ? 0 : fourDPlayerPosition.w );
+		bool rightSymetry = false;
+		bool upSymetry = false;
+		bool forwardSymetry = false;
 		if (fourDLevelRight.x < 0 || fourDLevelRight.y < 0 || fourDLevelRight.z < 0 || fourDLevelRight.w < 0)
 		{
 			fourDcoordinates -= fourDLevelRight*(worldSize-1);
+			rightSymetry = true;
 		}
 		if (fourDLevelForward.x < 0 || fourDLevelForward.y < 0 || fourDLevelForward.z < 0 || fourDLevelForward.w < 0)
 		{
 			fourDcoordinates -= fourDLevelForward*(worldSize-1);
+			forwardSymetry = true;
 		}
 		if (fourDLevelUp.x < 0 || fourDLevelUp.y < 0 || fourDLevelUp.z < 0 || fourDLevelUp.w < 0)
 		{
 			fourDcoordinates -= fourDLevelUp*(worldSize-1);
+			upSymetry = true;
 		}
 		// right, forward and up refers to the current Unity 3D Scene
 		for (int right = 0 ; right < worldSize ; right++)
@@ -493,6 +660,50 @@ public class GameEngine : MonoBehaviour
 							// Instantiate a gameObject from the prefab and put it at its 3D coordinates.
 							GameObject gameObject = availableCellPrefabsDico[cellContent.content];
 							GameObject newContent = (GameObject) Instantiate(gameObject, new Vector3(right*cellSize, up*cellSize, forward*cellSize), Quaternion.identity);
+
+							// Plein de cas particuliers pour les symétries des objets
+							// Meme avec tout ça, il reste des cas particuliers foireux
+							// Il y a forcément une formule simple (à moins que j'ai chié mon moteur)
+							// A voir plus tard...
+							if (!newContent.tag.Equals("Symetrical"))
+							{
+								if ( (fourDLevelRight.z < 0 && fourDLevelForward.x > 0 && fourDLevelFixed.w > 0) ||
+								    (fourDLevelRight.z < 0 && fourDLevelForward.w > 0 && fourDLevelFixed.x < 0) ||
+								    (fourDLevelRight.w > 0 && fourDLevelForward.x > 0 && fourDLevelFixed.z > 0) )
+								{
+									newContent.transform.localEulerAngles = new Vector3(0,90,0);
+									newContent.transform.localScale = new Vector3(-1 , 1 , -1);
+								}
+								else if ( (fourDLevelRight.z < 0 && fourDLevelForward.x < 0 && fourDLevelFixed.w < 0) ||
+								         (fourDLevelRight.z < 0 && fourDLevelForward.w < 0 && fourDLevelFixed.x > 0) ||
+								         (fourDLevelRight.w < 0 && fourDLevelForward.x < 0 && fourDLevelFixed.z > 0) )
+								{
+									newContent.transform.localEulerAngles = new Vector3(0,90,0);
+									newContent.transform.localScale = new Vector3(1 , 1 , -1);
+								}
+								else if ( (fourDLevelRight.z > 0 && fourDLevelForward.x > 0 && fourDLevelFixed.w < 0) || 
+								         (fourDLevelRight.w < 0 && fourDLevelForward.x > 0 && fourDLevelFixed.z < 0) || 
+								         (fourDLevelRight.z > 0 && fourDLevelForward.w > 0 && fourDLevelFixed.x > 0) )
+								{
+									newContent.transform.localEulerAngles = new Vector3(0,90,0);
+									newContent.transform.localScale = new Vector3(-1 , 1 , 1);
+								}
+								else if ( (fourDLevelRight.z > 0 && fourDLevelForward.x < 0 && fourDLevelFixed.w < 0) ||
+								         (fourDLevelRight.z > 0 && fourDLevelForward.x < 0 && fourDLevelFixed.w > 0) ||
+								         (fourDLevelRight.z > 0 && fourDLevelForward.w < 0 && fourDLevelFixed.x < 0) ||
+								         (fourDLevelRight.w > 0 && fourDLevelForward.x < 0 && fourDLevelFixed.z < 0) )
+								{
+									newContent.transform.localEulerAngles = new Vector3(0,90,0);
+									newContent.transform.localScale = new Vector3(1 , 1 , 1);
+								}
+								else
+								{
+									// Cas "général"
+									// Je pensais qu'il gèrerait toutes les possibilités
+									newContent.transform.localScale = new Vector3(rightSymetry ? -1:1 , upSymetry ? -1:1 , forwardSymetry ? -1:1);
+								}
+							}
+
 							newContent.transform.parent = nextLevel.transform;
 							// Particular case of the question marks
 							if (newContent.GetComponent<QuestionMarkBehaviour>() != null && cellContent.infoText != null)
@@ -508,7 +719,8 @@ public class GameEngine : MonoBehaviour
 					    Mathf.RoundToInt(fourDPlayerPosition.w) == Mathf.RoundToInt(fourDcoordinates.w) )
 					{
 						// Put player in its position (relatively to new level)
-						player.SetPlayerPosition( new Vector3(right, up, forward) * cellSize + Vector3.up , currentLevel );
+						float offsetY = fourDPlayerPosition.y - Mathf.RoundToInt(fourDPlayerPosition.y);
+						player.SetPlayerPosition( new Vector3(right, up+offsetY, forward) * cellSize + Vector3.up , currentLevel );
 					}
 					fourDcoordinates += fourDLevelUp; // fourDLevelUp can be negative (not for now, but it could)
 				}
@@ -602,6 +814,8 @@ public class GameEngine : MonoBehaviour
 		// destroy old level
 		StartCoroutine (WaitAndDestroyOldLevel (2));
 		holdAllInputs = true;
+
+		Debug.Log ("New 4D Coordinates after SwitchLevels = " + fourDPlayerPosition.ToString ());
 	}
 
 	public bool holdAllInputs;
