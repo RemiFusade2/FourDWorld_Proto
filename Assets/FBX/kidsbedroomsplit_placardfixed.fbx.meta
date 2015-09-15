@@ -1,0 +1,570 @@
+fileFormatVersion: 2
+guid: 7923a0ce3573b6245a84067f823e481b
+timeCreated: 1442132040
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Almi.001
+    100002: Almi.002
+    100004: Bed Box01.001
+    100006: Bed Box01.002
+    100008: Bed Box02.001
+    100010: Bed Box03.001
+    100012: Bed Box04.001
+    100014: Bed Box05.001
+    100016: Bed Box05.002
+    100018: Bed Plane.000
+    100020: Bed Plane.002
+    100022: Bed Plane.003
+    100024: Bed Plane.004
+    100026: Bed Plane.005
+    100028: Bed Plane.006
+    100030: Bed Plane.007
+    100032: Bed Plane.008
+    100034: Book.001
+    100036: Book1.001
+    100038: Book10.001
+    100040: Book11.001
+    100042: Book12.002
+    100044: Book13.001
+    100046: Book14.001
+    100048: Book15.001
+    100050: Book16.001
+    100052: Book17.001
+    100054: Book18.002
+    100056: Book19.001
+    100058: Book2.001
+    100060: Book20.002
+    100062: Book21.001
+    100064: Book22.001
+    100066: Book23.001
+    100068: Book24.002
+    100070: Book25.001
+    100072: Book26.001
+    100074: Book27.002
+    100076: Book28.002
+    100078: Book29.001
+    100080: Book3.001
+    100082: Book30.001
+    100084: Book31.001
+    100086: Book32.002
+    100088: Book33.002
+    100090: Book34.001
+    100092: Book35.002
+    100094: Book4.001
+    100096: Book5.001
+    100098: Book6.002
+    100100: Book7.002
+    100102: Book8.002
+    100104: Book9.001
+    100106: Camera.001
+    100108: Camera.002
+    100110: Camera.003
+    100112: Camera.004
+    100114: Camera.005
+    100116: Camera.006
+    100118: Dust.001
+    100120: Hand.001
+    100122: Hand1.001
+    100124: Hand10.002
+    100126: Hand11
+    100128: Hand12.001
+    100130: Hand13
+    100132: Hand14.001
+    100134: Hand15.001
+    100136: Hand16.001
+    100138: Hand18.002
+    100140: Hand19.001
+    100142: Hand2.001
+    100144: Hand3.001
+    100146: Hand4.001
+    100148: Hand5.001
+    100150: Hand5.002
+    100152: Hand6.001
+    100154: Hand7.001
+    100156: Hand8.001
+    100158: Hand9.001
+    100160: //RootNode
+    100162: L_tab.001
+    100164: L_tab.002
+    100166: L_tab.003
+    100168: L_tab.004
+    100170: L_tab.005
+    100172: L_tab.006
+    100174: Lamp.001
+    100176: Lamp.003
+    100178: Lamp.004
+    100180: Pellow.001
+    100182: Pellow_1.001
+    100184: Pellow_2.001
+    100186: Pellow_3.001
+    100188: Pellow_4.001
+    100190: Pellow_4.002
+    100192: Photo.001
+    100194: Placard
+    100196: Placard Side
+    100198: R_Hand
+    100200: R_Hand1
+    100202: Sel.001
+    100204: Sel.002
+    100206: T_Self.002
+    100208: Tab
+    100210: TV.001
+    100212: TV.002
+    400000: Almi.001
+    400002: Almi.002
+    400004: Bed Box01.001
+    400006: Bed Box01.002
+    400008: Bed Box02.001
+    400010: Bed Box03.001
+    400012: Bed Box04.001
+    400014: Bed Box05.001
+    400016: Bed Box05.002
+    400018: Bed Plane.000
+    400020: Bed Plane.002
+    400022: Bed Plane.003
+    400024: Bed Plane.004
+    400026: Bed Plane.005
+    400028: Bed Plane.006
+    400030: Bed Plane.007
+    400032: Bed Plane.008
+    400034: Book.001
+    400036: Book1.001
+    400038: Book10.001
+    400040: Book11.001
+    400042: Book12.002
+    400044: Book13.001
+    400046: Book14.001
+    400048: Book15.001
+    400050: Book16.001
+    400052: Book17.001
+    400054: Book18.002
+    400056: Book19.001
+    400058: Book2.001
+    400060: Book20.002
+    400062: Book21.001
+    400064: Book22.001
+    400066: Book23.001
+    400068: Book24.002
+    400070: Book25.001
+    400072: Book26.001
+    400074: Book27.002
+    400076: Book28.002
+    400078: Book29.001
+    400080: Book3.001
+    400082: Book30.001
+    400084: Book31.001
+    400086: Book32.002
+    400088: Book33.002
+    400090: Book34.001
+    400092: Book35.002
+    400094: Book4.001
+    400096: Book5.001
+    400098: Book6.002
+    400100: Book7.002
+    400102: Book8.002
+    400104: Book9.001
+    400106: Camera.001
+    400108: Camera.002
+    400110: Camera.003
+    400112: Camera.004
+    400114: Camera.005
+    400116: Camera.006
+    400118: Dust.001
+    400120: Hand.001
+    400122: Hand1.001
+    400124: Hand10.002
+    400126: Hand11
+    400128: Hand12.001
+    400130: Hand13
+    400132: Hand14.001
+    400134: Hand15.001
+    400136: Hand16.001
+    400138: Hand18.002
+    400140: Hand19.001
+    400142: Hand2.001
+    400144: Hand3.001
+    400146: Hand4.001
+    400148: Hand5.001
+    400150: Hand5.002
+    400152: Hand6.001
+    400154: Hand7.001
+    400156: Hand8.001
+    400158: Hand9.001
+    400160: //RootNode
+    400162: L_tab.001
+    400164: L_tab.002
+    400166: L_tab.003
+    400168: L_tab.004
+    400170: L_tab.005
+    400172: L_tab.006
+    400174: Lamp.001
+    400176: Lamp.003
+    400178: Lamp.004
+    400180: Pellow.001
+    400182: Pellow_1.001
+    400184: Pellow_2.001
+    400186: Pellow_3.001
+    400188: Pellow_4.001
+    400190: Pellow_4.002
+    400192: Photo.001
+    400194: Placard
+    400196: Placard Side
+    400198: R_Hand
+    400200: R_Hand1
+    400202: Sel.001
+    400204: Sel.002
+    400206: T_Self.002
+    400208: Tab
+    400210: TV.001
+    400212: TV.002
+    2300000: Almi.001
+    2300002: Almi.002
+    2300004: Bed Box01.001
+    2300006: Bed Box01.002
+    2300008: Bed Box02.001
+    2300010: Bed Box03.001
+    2300012: Bed Box04.001
+    2300014: Bed Box05.001
+    2300016: Bed Box05.002
+    2300018: Bed Plane.000
+    2300020: Bed Plane.002
+    2300022: Bed Plane.003
+    2300024: Bed Plane.004
+    2300026: Bed Plane.005
+    2300028: Bed Plane.006
+    2300030: Bed Plane.007
+    2300032: Bed Plane.008
+    2300034: Book.001
+    2300036: Book1.001
+    2300038: Book10.001
+    2300040: Book11.001
+    2300042: Book12.002
+    2300044: Book13.001
+    2300046: Book14.001
+    2300048: Book15.001
+    2300050: Book16.001
+    2300052: Book17.001
+    2300054: Book18.002
+    2300056: Book19.001
+    2300058: Book2.001
+    2300060: Book20.002
+    2300062: Book21.001
+    2300064: Book22.001
+    2300066: Book23.001
+    2300068: Book24.002
+    2300070: Book25.001
+    2300072: Book26.001
+    2300074: Book27.002
+    2300076: Book28.002
+    2300078: Book29.001
+    2300080: Book3.001
+    2300082: Book30.001
+    2300084: Book31.001
+    2300086: Book32.002
+    2300088: Book33.002
+    2300090: Book34.001
+    2300092: Book35.002
+    2300094: Book4.001
+    2300096: Book5.001
+    2300098: Book6.002
+    2300100: Book7.002
+    2300102: Book8.002
+    2300104: Book9.001
+    2300106: Dust.001
+    2300108: Hand.001
+    2300110: Hand1.001
+    2300112: Hand10.002
+    2300114: Hand11
+    2300116: Hand12.001
+    2300118: Hand13
+    2300120: Hand14.001
+    2300122: Hand15.001
+    2300124: Hand16.001
+    2300126: Hand18.002
+    2300128: Hand19.001
+    2300130: Hand2.001
+    2300132: Hand3.001
+    2300134: Hand4.001
+    2300136: Hand5.001
+    2300138: Hand5.002
+    2300140: Hand6.001
+    2300142: Hand7.001
+    2300144: Hand8.001
+    2300146: Hand9.001
+    2300148: L_tab.001
+    2300150: L_tab.002
+    2300152: L_tab.003
+    2300154: L_tab.004
+    2300156: L_tab.005
+    2300158: L_tab.006
+    2300160: Pellow.001
+    2300162: Pellow_1.001
+    2300164: Pellow_2.001
+    2300166: Pellow_3.001
+    2300168: Pellow_4.001
+    2300170: Pellow_4.002
+    2300172: Photo.001
+    2300174: Placard
+    2300176: Placard Side
+    2300178: R_Hand
+    2300180: R_Hand1
+    2300182: Sel.001
+    2300184: Sel.002
+    2300186: T_Self.002
+    2300188: Tab
+    2300190: TV.001
+    2300192: TV.002
+    3300000: Almi.001
+    3300002: Almi.002
+    3300004: Bed Box01.001
+    3300006: Bed Box01.002
+    3300008: Bed Box02.001
+    3300010: Bed Box03.001
+    3300012: Bed Box04.001
+    3300014: Bed Box05.001
+    3300016: Bed Box05.002
+    3300018: Bed Plane.000
+    3300020: Bed Plane.002
+    3300022: Bed Plane.003
+    3300024: Bed Plane.004
+    3300026: Bed Plane.005
+    3300028: Bed Plane.006
+    3300030: Bed Plane.007
+    3300032: Bed Plane.008
+    3300034: Book.001
+    3300036: Book1.001
+    3300038: Book10.001
+    3300040: Book11.001
+    3300042: Book12.002
+    3300044: Book13.001
+    3300046: Book14.001
+    3300048: Book15.001
+    3300050: Book16.001
+    3300052: Book17.001
+    3300054: Book18.002
+    3300056: Book19.001
+    3300058: Book2.001
+    3300060: Book20.002
+    3300062: Book21.001
+    3300064: Book22.001
+    3300066: Book23.001
+    3300068: Book24.002
+    3300070: Book25.001
+    3300072: Book26.001
+    3300074: Book27.002
+    3300076: Book28.002
+    3300078: Book29.001
+    3300080: Book3.001
+    3300082: Book30.001
+    3300084: Book31.001
+    3300086: Book32.002
+    3300088: Book33.002
+    3300090: Book34.001
+    3300092: Book35.002
+    3300094: Book4.001
+    3300096: Book5.001
+    3300098: Book6.002
+    3300100: Book7.002
+    3300102: Book8.002
+    3300104: Book9.001
+    3300106: Dust.001
+    3300108: Hand.001
+    3300110: Hand1.001
+    3300112: Hand10.002
+    3300114: Hand11
+    3300116: Hand12.001
+    3300118: Hand13
+    3300120: Hand14.001
+    3300122: Hand15.001
+    3300124: Hand16.001
+    3300126: Hand18.002
+    3300128: Hand19.001
+    3300130: Hand2.001
+    3300132: Hand3.001
+    3300134: Hand4.001
+    3300136: Hand5.001
+    3300138: Hand5.002
+    3300140: Hand6.001
+    3300142: Hand7.001
+    3300144: Hand8.001
+    3300146: Hand9.001
+    3300148: L_tab.001
+    3300150: L_tab.002
+    3300152: L_tab.003
+    3300154: L_tab.004
+    3300156: L_tab.005
+    3300158: L_tab.006
+    3300160: Pellow.001
+    3300162: Pellow_1.001
+    3300164: Pellow_2.001
+    3300166: Pellow_3.001
+    3300168: Pellow_4.001
+    3300170: Pellow_4.002
+    3300172: Photo.001
+    3300174: Placard
+    3300176: Placard Side
+    3300178: R_Hand
+    3300180: R_Hand1
+    3300182: Sel.001
+    3300184: Sel.002
+    3300186: T_Self.002
+    3300188: Tab
+    3300190: TV.001
+    3300192: TV.002
+    4300000: Placard Side
+    4300002: Placard
+    4300004: Hand13
+    4300006: Tab
+    4300008: Hand11
+    4300010: R_Hand1
+    4300012: R_Hand
+    4300014: Bed Box01.001
+    4300016: Bed Box02.001
+    4300018: Bed Box03.001
+    4300020: Bed Box05.001
+    4300022: Bed Plane.002
+    4300024: Bed Box04.001
+    4300026: Pellow.001
+    4300028: Pellow_1.001
+    4300030: Pellow_2.001
+    4300032: Photo.001
+    4300034: Bed Box01.002
+    4300036: Bed Box05.002
+    4300038: Bed Plane.003
+    4300040: Bed Plane.004
+    4300042: Book.001
+    4300044: Book10.001
+    4300046: Book11.001
+    4300048: Book13.001
+    4300050: Book14.001
+    4300052: Book15.001
+    4300054: Book16.001
+    4300056: Book17.001
+    4300058: Book19.001
+    4300060: Book2.001
+    4300062: Book23.001
+    4300064: Book25.001
+    4300066: Book26.001
+    4300068: Book29.001
+    4300070: Book3.001
+    4300072: Book30.001
+    4300074: Book31.001
+    4300076: Book34.001
+    4300078: Book4.001
+    4300080: Book5.001
+    4300082: Hand.001
+    4300084: Hand1.001
+    4300086: Hand12.001
+    4300088: Hand16.001
+    4300090: Hand19.001
+    4300092: Hand2.001
+    4300094: L_tab.001
+    4300096: Pellow_4.001
+    4300098: Book12.002
+    4300100: Book18.002
+    4300102: Book20.002
+    4300104: Book24.002
+    4300106: Book27.002
+    4300108: Book28.002
+    4300110: Book32.002
+    4300112: Book33.002
+    4300114: Book35.002
+    4300116: Book6.002
+    4300118: Book7.002
+    4300120: Book8.002
+    4300122: Hand18.002
+    4300124: T_Self.002
+    4300126: Sel.002
+    4300128: TV.002
+    4300130: L_tab.002
+    4300132: Bed Plane.000
+    4300134: Pellow_4.002
+    4300136: Bed Plane.005
+    4300138: Book1.001
+    4300140: Book21.001
+    4300142: Book22.001
+    4300144: Book9.001
+    4300146: L_tab.003
+    4300148: Pellow_3.001
+    4300150: Sel.001
+    4300152: TV.001
+    4300154: Bed Plane.006
+    4300156: Hand5.001
+    4300158: L_tab.004
+    4300160: Bed Plane.007
+    4300162: Hand14.001
+    4300164: Hand4.001
+    4300166: Hand5.002
+    4300168: Hand6.001
+    4300170: Hand7.001
+    4300172: Hand9.001
+    4300174: L_tab.005
+    4300176: Bed Plane.008
+    4300178: Hand15.001
+    4300180: L_tab.006
+    4300182: Almi.001
+    4300184: Dust.001
+    4300186: Hand3.001
+    4300188: Hand8.001
+    4300190: Almi.002
+    4300192: Hand10.002
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
