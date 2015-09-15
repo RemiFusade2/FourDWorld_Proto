@@ -40,6 +40,7 @@ public class MyFirstPersonController : MonoBehaviour
 
 	public bool ignoreFalls;
 	public bool ignoreCollisions;
+	public bool editMode;
 
 	/**
 	 * Set the player position and ensure that both previous level and current level are consistent with it.
@@ -156,81 +157,82 @@ public class MyFirstPersonController : MonoBehaviour
 	void Update () 
 	{
 		// Edit level 
-		if (Input.GetKeyDown(KeyCode.DownArrow))
+		if (editMode)
 		{
-			startPlayerPosition = this.transform.localPosition;
-			this.transform.localPosition = endPlayerPosition;
-			this.transform.localRotation = endPlayerQuaternion;
-			this.transform.position = this.transform.position + this.transform.up * -3;
-			endPlayerPosition = this.transform.localPosition;
-			gameEngine.MovePlayerVertically(-1);
-			//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
-			playerMoveStep = 0;
-			playerMoves = true;
-		} 
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			startPlayerPosition = this.transform.localPosition;
-			this.transform.localPosition = endPlayerPosition;
-			this.transform.localRotation = endPlayerQuaternion;
-			this.transform.position = this.transform.position + this.transform.up * 3;
-			endPlayerPosition = this.transform.localPosition;
-			gameEngine.MovePlayerVertically(1);
-			//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
-			playerMoveStep = 0;
-			playerMoves = true;
-		} 
-		if (Input.GetKeyDown(KeyCode.Keypad1))
-	    {
-			gameEngine.AddHalfCubeToCurrentPosition("Green");
-		} 
-		if (Input.GetKeyDown(KeyCode.Keypad2))
-		{
-			gameEngine.AddHalfCubeToCurrentPosition("Orange");
-		} 
-		if (Input.GetKeyDown(KeyCode.Keypad3))
-		{
-			gameEngine.AddHalfCubeToCurrentPosition("Red");
+			if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
+				startPlayerPosition = this.transform.localPosition;
+				this.transform.localPosition = endPlayerPosition;
+				this.transform.localRotation = endPlayerQuaternion;
+				this.transform.position = this.transform.position + this.transform.up * -3;
+				endPlayerPosition = this.transform.localPosition;
+				gameEngine.MovePlayerVertically(-1);
+				//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
+				playerMoveStep = 0;
+				playerMoves = true;
+			} 
+			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				startPlayerPosition = this.transform.localPosition;
+				this.transform.localPosition = endPlayerPosition;
+				this.transform.localRotation = endPlayerQuaternion;
+				this.transform.position = this.transform.position + this.transform.up * 3;
+				endPlayerPosition = this.transform.localPosition;
+				gameEngine.MovePlayerVertically(1);
+				//gameEngine.UpdatePlayerFourDPosition(this.transform.up.x,this.transform.up.y,this.transform.up.z);
+				playerMoveStep = 0;
+				playerMoves = true;
+			} 
+			if (Input.GetKeyDown(KeyCode.Keypad1))
+			{
+				gameEngine.AddHalfCubeToCurrentPosition("Green");
+			} 
+			if (Input.GetKeyDown(KeyCode.Keypad2))
+			{
+				gameEngine.AddHalfCubeToCurrentPosition("Orange");
+			} 
+			if (Input.GetKeyDown(KeyCode.Keypad3))
+			{
+				gameEngine.AddHalfCubeToCurrentPosition("Red");
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad4))
+			{
+				gameEngine.AddCubeToCurrentPosition("green");
+			} 
+			if (Input.GetKeyDown(KeyCode.Keypad5))
+			{
+				gameEngine.AddCubeToCurrentPosition("orange");
+			} 
+			if (Input.GetKeyDown(KeyCode.Keypad6))
+			{
+				gameEngine.AddCubeToCurrentPosition("red");
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad7))
+			{
+				gameEngine.AddPalmTreeToCurrentPosition();
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad8))
+			{
+				gameEngine.AddConiferToCurrentPosition();
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad9))
+			{
+				gameEngine.AddBroadleafToCurrentPosition();
+			}
+			if (Input.GetKeyDown(KeyCode.L))
+			{
+				gameEngine.AddLightToCurrentPosition();
+			}
+			
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				gameEngine.RemoveCellFromCurrentPosition();
+			}
+			if (Input.GetKeyDown(KeyCode.M))
+			{
+				gameEngine.SaveLevelToXML("test.xml");
+			}
 		}
-		if (Input.GetKeyDown(KeyCode.Keypad4))
-		{
-			gameEngine.AddCubeToCurrentPosition("green");
-		} 
-		if (Input.GetKeyDown(KeyCode.Keypad5))
-		{
-			gameEngine.AddCubeToCurrentPosition("orange");
-		} 
-		if (Input.GetKeyDown(KeyCode.Keypad6))
-		{
-			gameEngine.AddCubeToCurrentPosition("red");
-		}
-		if (Input.GetKeyDown(KeyCode.Keypad7))
-		{
-			gameEngine.AddPalmTreeToCurrentPosition();
-		}
-		if (Input.GetKeyDown(KeyCode.Keypad8))
-		{
-			gameEngine.AddConiferToCurrentPosition();
-		}
-		if (Input.GetKeyDown(KeyCode.Keypad9))
-		{
-			gameEngine.AddBroadleafToCurrentPosition();
-		}
-		if (Input.GetKeyDown(KeyCode.L))
-		{
-			gameEngine.AddLightToCurrentPosition();
-		}
-
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			gameEngine.RemoveCellFromCurrentPosition();
-		}
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			gameEngine.SaveLevelToXML("test.xml");
-		}
-
-
 
 		// During a 4D rotation, all the level is drawn again. 
 		// During this time, we don't want the player to be able to move. This is why we use "holdAllInputs"
